@@ -1,20 +1,17 @@
 <%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'error' %>
 
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %><br>
   </div>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %><br>
+  </div>
+
+  <%= collection_check_boxes :post, :tag_ids, Tag.all, :id, :name %>
 
   <div class="actions">
     <%= f.submit %>
